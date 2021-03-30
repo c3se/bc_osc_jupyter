@@ -1,51 +1,40 @@
 <%-
-  cores = num_cores.to_i
-
-  if cores == 0 && cluster == "pitzer"
-    # little optimization for pitzer nodes. They want the whole node, if they chose 'any',
-    # it can be scheduled on p18 or p20 nodes. If not, they'll get the constraint below.
-    base_slurm_args = ["--nodes", "1", "--exclusive"]
-  elsif cores == 0
-    # full node on owens
-    cores = 28
-    base_slurm_args = ["--nodes", "1", "--ntasks-per-node", "28"]
-  else
-    base_slurm_args = ["--nodes", "1", "--ntasks-per-node", "#{cores}"]
-  end
+  base_slurm_args = []
 
   slurm_args = case node_type
-              when "gpu"
-                base_slurm_args + ["--gpus-per-node", "1"]
-              when "gpu-40core"
-                base_slurm_args + ["--gpus-per-node", "1", "--constraint", "40core"]
-              when "gpu-48core"
-                base_slurm_args + ["--gpus-per-node", "1", "--constraint", "48core"]
-              when "any-40core"
-                base_slurm_args + ["--constraint", "40core"]
-              when "any-48core"
-                base_slurm_args + ["--constraint", "48core"]
-              when "hugemem"
-                base_slurm_args + ["--partition", "hugemem", "--exclusive"]
-              when "largemem"
-                base_slurm_args + ["--partition", "largemem", "--exclusive"]
-              when "debug"
-                base_slurm_args += ["--partition", "debug", "--exclusive"]
-              else
-                base_slurm_args
+              when "1xT4"
+                base_slurm_args + ["--gpus-per-node", "T4:1"]
+              when "2xT4"
+                base_slurm_args + ["--gpus-per-node", "T4:2"]
+              when "3xT4"
+                base_slurm_args + ["--gpus-per-node", "T4:3"]
+              when "4xT4"
+                base_slurm_args + ["--gpus-per-node", "T4:4"]
+              when "5xT4"
+                base_slurm_args + ["--gpus-per-node", "T4:5"]
+              when "6xT4"
+                base_slurm_args + ["--gpus-per-node", "T4:6"]
+              when "7xT4"
+                base_slurm_args + ["--gpus-per-node", "T4:7"]
+              when "8xT4"
+                base_slurm_args + ["--gpus-per-node", "T4:8"]
+              when "1xV100"
+                base_slurm_args + ["--gpus-per-node", "V100:1"]
+              when "2xV100"
+                base_slurm_args + ["--gpus-per-node", "V100:2"]
+              when "3xV100"
+                base_slurm_args + ["--gpus-per-node", "V100:3"]
+              when "4xV100"
+                base_slurm_args + ["--gpus-per-node", "V100:4"]
+              when "1xA100"
+                base_slurm_args + ["--gpus-per-node", "A100:1"]
+              when "2xA100"
+                base_slurm_args + ["--gpus-per-node", "A100:2"]
+              when "3xA100"
+                base_slurm_args + ["--gpus-per-node", "A100:3"]
+              when "4xA100"
+                base_slurm_args + ["--gpus-per-node", "A100:4"]
               end
-
-  torque_args = case node_type
-              when "gpu"
-                ":ppn=#{cores}:gpus=1"
-              when "hugemem"
-                # disregard what num_cores was submitted (0 or 48 are the only valid options)
-                ":ppn=48"
-              else
-                ":ppn=#{cores}"
-              end
-
-  torque_cluster = OodAppkit.clusters[cluster].job_config[:adapter] == 'torque'
-
 -%>
 ---
 batch_connect:
@@ -53,16 +42,7 @@ batch_connect:
   conn_params:
     - jupyter_api
 script:
-  # need to unify --partition args above and queue_name below when owens is fully Slurm
-  <%- if node_type == "debug" && torque_cluster -%>
-  queue_name: "debug"
-  <%- end -%>
   native:
-    <%- if torque_cluster %>
-    resources:
-      nodes: "1<%= torque_args %>"
-    <%- else %>
     <%- slurm_args.each do |arg| %>
     - "<%= arg %>"
-    <%- end %>
     <%- end %>

@@ -1,211 +1,40 @@
 ---
+cluster: "alvis"
 form:
   - cluster
   - bc_account
-  - jupyterlab_switch
   - bc_num_hours
   - node_type
-  - cuda_version
-  - num_cores
   - version
   - bc_email_on_started
-  - classroom
 attributes:
-  cluster:
-    widget: "select"
-    options:
-      - "owens"
-      - "owens-slurm"
-      - "pitzer"
-  jupyterlab_switch:
-    widget: "check_box"
-    label: "Use JupyterLab instead of Jupyter Notebook?"
-    help: |
-      JupyterLab is the next generation of Jupyter, and is completely compatible with existing Jupyter Notebooks.
-  num_cores:
-    widget: "number_field"
-    label: "Number of cores"
-    value: 1
-    help: |
-      Number of cores on node type (4 GB per core unless requesting whole
-      node). Leave blank if requesting full node.
-    min: 1
-    max: 28
-    step: 1
   bc_account:
     label: "Project"
-    help: "You can leave this blank if **not** in multiple projects."
-  cuda_version:
-    widget: "select"
-    label: "CUDA Version"
-    help: |
-      CUDA is Nvidia's GPU-specific parallel computing framework. A GPU node
-      is required to make use of this functionality.
-    options:
-      - [ 
-          "cuda/8.0.44",    "cuda/8.0.44",
-          data-option-for-owens: true,
-          data-option-for-owens-slurm: true,
-          data-option-for-pitzer: false
-        ]
-      - [ 
-          "cuda/8.0.61",    "cuda/8.0.61",
-          data-option-for-owens: true,
-          data-option-for-owens-slurm: true,
-          data-option-for-pitzer: false
-        ]
-      - [ 
-          "cuda/9.0.176",   "cuda/9.0.176",
-          data-option-for-owens: true,
-          data-option-for-owens-slurm: true,
-          data-option-for-pitzer: true
-        ]
-      - [ 
-          "cuda/9.1.85",    "cuda/9.1.85",
-          data-option-for-owens: true,
-          data-option-for-owens-slurm: true,
-          data-option-for-pitzer: true
-        ]
-      - [ 
-          "cuda/9.2.88",    "cuda/9.2.88",
-          data-option-for-owens: true,
-          data-option-for-owens-slurm: true,
-          data-option-for-pitzer: true
-        ]
-      - [ 
-          "cuda/10.0.130",  "cuda/10.0.130",
-          data-option-for-owens: true,
-          data-option-for-owens-slurm: true,
-          data-option-for-pitzer: true
-        ]
-      - [ 
-          "cuda/10.1.168",  "cuda/10.1.168",
-          data-option-for-owens: true,
-          data-option-for-owens-slurm: true,
-          data-option-for-pitzer: true
-        ]
-      - [
-          "cuda/10.2.89",   "cuda/10.2.89",
-          data-option-for-owens: true,
-          data-option-for-owens-slurm: true,
-          data-option-for-pitzer: true
-        ]
+    help: "Write in your project"
   node_type:
-    widget: select
+    widget: "select"
     label: "Node type"
-    help: |
-      - **Standard Compute** <br>
-        These are standard HPC machines. Owens has 648 of these nodes with 40
-        cores and 128 GB of memory. Pitzer has 224 with 40 cores and
-        340 with 48. All pitzer nodes have 192 GB of RAM. Chosing any will decrease
-        your wait time.
-      - **GPU Enabled** <br>
-        These are HPC machines GPUs. Owens has 160 nodes with 1 [NVIDIA Tesla P100 GPU]
-        on Owens and Pitzer has 74 with 2 [NVIDIA Tesla V100 GPUs]. They have the same
-        CPU and memory characteristics of standard compute. Though Pitzer's 40 core machines
-        have 2 GPUs with 16 GB of RAM and 48 core machines have 2with 32 GB of RAM.
-        Densegpu types have 4 GPUs with 16 GB of RAM.
-      - **Large Memory** <br>
-        These are HPC machines with very large amounts of memory. Owens has 16 hugemem
-        with 48 cores and 1.5 TB of RAM. Pitzer has 4 with 3 TB of RAM and 80 cores.
-        Pitzer also has 12 Largmem nodes have 48 cores with 768 GB of RAM.
-
-      [NVIDIA Tesla P100 GPU]: http://www.nvidia.com/object/tesla-p100.html
-      [NVIDIA Tesla V100 GPUs]: https://www.nvidia.com/en-us/data-center/v100/
     options:
-      - [
-          "any",     "any",
-          data-min-ppn-owens: 1,
-          data-max-ppn-owens: 28,
-          data-min-ppn-owens-slurm: 1,
-          data-max-ppn-owens-slurm: 28,
-          data-min-ppn-pitzer: 1,
-          data-max-ppn-pitzer: 48,
-          data-option-for-owens: true,
-          data-option-for-owens-slurm: true,
-          data-option-for-pitzer: true
-        ]
-      - [
-          "40 core",     "any-40core",
-          data-min-ppn-pitzer: 1,
-          data-max-ppn-pitzer: 40,
-          data-option-for-owens: false,
-          data-option-for-owens-slurm: false,
-          data-option-for-pitzer: true
-        ]
-      - [
-          "48 core",     "any-48core",
-          data-min-ppn-pitzer: 1,
-          data-max-ppn-pitzer: 48,
-          data-option-for-owens: false,
-          data-option-for-owens-slurm: false,
-          data-option-for-pitzer: true
-        ]
-      - [
-          "any gpu",     "gpu",
-          data-min-ppn-owens: 1,
-          data-max-ppn-owens: 28,
-          data-min-ppn-owens-slurm: 1,
-          data-max-ppn-owens-slurm: 28,
-          data-min-ppn-pitzer: 1,
-          data-max-ppn-pitzer: 48,
-          data-option-for-owens: true,
-          data-option-for-owens-slurm: true,
-          data-option-for-pitzer: true
-        ]
-      - [
-          "40 core gpu",     "gpu-40core",
-          data-min-ppn-pitzer: 1,
-          data-max-ppn-pitzer: 40,
-          data-option-for-owens: false,
-          data-option-for-owens-slurm: false,
-          data-option-for-pitzer: true
-        ]
-      - [
-          "48 core gpu",     "gpu-48core",
-          data-min-ppn-pitzer: 1,
-          data-max-ppn-pitzer: 48,
-          data-option-for-owens: false,
-          data-option-for-owens-slurm: false,
-          data-option-for-pitzer: true
-        ]
-      - [
-          "largemem", "largemem",
-          data-min-ppn-pitzer: 48,
-          data-max-ppn-pitzer: 48,
-          data-option-for-owens: false,
-          data-option-for-owens-slurm: false,
-          data-option-for-pitzer: true
-        ]
-      - [
-          "hugemem", "hugemem",
-          data-min-ppn-owens: 48,
-          data-max-ppn-owens: 48,
-          data-min-ppn-owens-slurm: 48,
-          data-max-ppn-owens-slurm: 48,
-          data-min-ppn-pitzer: 80,
-          data-max-ppn-pitzer: 80,
-          data-option-for-owens: true,
-          data-option-for-owens-slurm: true,
-          data-option-for-pitzer: true
-        ]
-      - [
-          "debug",   "debug",
-          data-min-ppn-owens: 1,
-          data-max-ppn-owens: 28,
-          data-min-ppn-owens-slurm: 1,
-          data-max-ppn-owens-slurm: 28,
-          data-min-ppn-pitzer: 1,
-          data-max-ppn-pitzer: 48,
-          data-option-for-owens: true,
-          data-option-for-owens-slurm: true,
-          data-option-for-pitzer: true
-        ]
+      - [ "1xT4", "1xT4", data-option-for-alvis: true ]
+      - [ "2xT4", "2xT4", data-option-for-alvis: true ]
+      - [ "3xT4", "3xT4", data-option-for-alvis: true ]
+      - [ "4xT4", "4xT4", data-option-for-alvis: true ]
+      - [ "5xT4", "5xT4", data-option-for-alvis: true ]
+      - [ "6xT4", "6xT4", data-option-for-alvis: true ]
+      - [ "7xT4", "7xT4", data-option-for-alvis: true ]
+      - [ "8xT4", "8xT4", data-option-for-alvis: true ]
+      - [ "1xV100", "1xV100", data-option-for-alvis: true ]
+      - [ "2xV100", "2xV100", data-option-for-alvis: true ]
+      - [ "3xV100", "3xV100", data-option-for-alvis: true ]
+      - [ "4xV100", "4xV100", data-option-for-alvis: true ]
   version:
     widget: "select"
-    label: "JupyterLab Version"
+    label: "Runtime"
     options:
-      - [ "2.1",  "app_jupyter/2.1.4" ]
-      - [ "1.2",  "app_jupyter/1.2.16" ]
-      - [ "0.35", "app_jupyter/0.35.6" ]
-  classroom: 0
+      - [ "JupyterLab",  "jupyter_lab/2019b" ]
+      - [ "Jupyter notebook",  "jupyter_notebook/2019b" ]
+      - [ "Container: TensorFlow-2.3.1",  "/apps/hpc-ai-containers/TensorFlow/TensorFlow_v2.3.1-tf2-py3-GPU-Jupyter.sif" ]
+      - [ "Container: TensorFlow 2.2.0 NGC",  "/apps/hpc-ai-containers/TensorFlow/TensorFlow_v2.2.0-tf2-py3-NGC-R20.08.sif" ]
+      - [ "Container: TensorFlow 2.1.0 NGC",  "/apps/hpc-ai-co ntainers/TensorFlow/TensorFlow_v2.1.0-tf2-py3-NGC-R20.03.sif" ]
+      - [ "Container: PyTorch 1.7.0",  "/apps/hpc-ai-containers/PyTorch/PyTorch_v1.7.0-py3.sif" ]
+      - [ "Container: PyTorch 1.6.0",  "/apps/hpc-ai-containers/PyTorch/PyTorch_v1.6.0-py3.sif" ]
