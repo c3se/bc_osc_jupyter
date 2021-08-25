@@ -5,6 +5,51 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+## [0.21.2] - 2021-08-19
+
+### Fixed
+
+- [72](https://github.com/OSC/bc_osc_jupyter/pull/72) fixed a bug in classrooms where they hid
+  versions because they didn't have the data options for clusters.
+
+## [0.21.1] - 2021-08-18
+
+### Fixed
+
+- [69](https://github.com/OSC/bc_osc_jupyter/pull/69) fixed a bug with classrooms not finding the current cluster.
+
+## [0.21.0] - 2021-08-13
+
+### Changed
+
+- [68](https://github.com/OSC/bc_osc_jupyter/pull/68) changed the jupyter versions for security updates.
+
+## [0.20.0] - 2021-08-05
+
+### Added
+
+- [61](https://github.com/OSC/bc_osc_jupyter/pull/61) added the kubernetes clusters.
+
+## [0.19.2] - 2021-08-03
+### Added
+- [65](https://github.com/OSC/bc_osc_jupyter/pull/65) added jupyterlab 3.0.16.
+
+## [0.19.1] - 2021-03-02
+### Added
+- [59](https://github.com/OSC/bc_osc_jupyter/pull/59) added the julia/1.5.3 module
+  as well as some documentation on how to use julia 1.0+ modules.
+
+## [0.19.0] - 2021-01-20
+### Changed
+- Account is now a select widget with only valid groups as options in
+  [57](https://github.com/OSC/bc_osc_jupyter/pull/57)
+- Removed unused data slurm-owens fattributes in [58](https://github.com/OSC/bc_osc_jupyter/pull/58)
+
+## [0.18.0] - 2020-12-28
+### Changed
+- Removed the owens-slurm cluster and all torque related configurations
+  in [56](https://github.com/OSC/bc_osc_jupyter/pull/56)
+
 ## [0.17.0] - 2020-11-18
 ### Added
 - Add the owens-slurm cluster to begin migrating Owens from Torque to Slurm.
@@ -254,7 +299,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - Initial release!
 
-[Unreleased]: https://github.com/OSC/bc_osc_jupyter/compare/v0.17.0...HEAD
+[Unreleased]: https://github.com/OSC/bc_osc_jupyter/compare/v0.21.1...HEAD
+[0.21.1]: https://github.com/OSC/bc_osc_jupyter/compare/v0.21.0...v0.21.1
+[0.21.0]: https://github.com/OSC/bc_osc_jupyter/compare/v0.20.0...v0.21.0
+[0.20.0]: https://github.com/OSC/bc_osc_jupyter/compare/v0.19.2...v0.20.0
+[0.19.2]: https://github.com/OSC/bc_osc_jupyter/compare/v0.19.1...v0.19.2
+[0.19.1]: https://github.com/OSC/bc_osc_jupyter/compare/v0.19.0...v0.19.1
+[0.19.0]: https://github.com/OSC/bc_osc_jupyter/compare/v0.18.0...v0.19.0
+[0.18.0]: https://github.com/OSC/bc_osc_jupyter/compare/v0.17.0...v0.18.0
 [0.17.0]: https://github.com/OSC/bc_osc_jupyter/compare/v0.16.2...v0.17.0
 [0.16.2]: https://github.com/OSC/bc_osc_jupyter/compare/v0.16.1...v0.16.2
 [0.16.1]: https://github.com/OSC/bc_osc_jupyter/compare/v0.16.0...v0.16.1

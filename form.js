@@ -139,9 +139,7 @@ function toggle_options(element_name) {
     let data = option_element.data();
     let show = data["optionFor" + cluster];
 
-    if(show) {
-      option_element.show();
-    } else {
+    if(show == false) {
       option_element.hide();
 
       if(option_element.prop('selected')) {
@@ -154,6 +152,8 @@ function toggle_options(element_name) {
           option_element.next().prop('selected', true);
         }
       }
+    } else {
+      option_element.show();
     }
   });
 }
@@ -186,12 +186,22 @@ function max_cores_for_cluster(cluster_name) {
  */
 function toggle_cuda_version_visibility(selected_node_type) {
   const cuda_element = $('#batch_connect_session_context_cuda_version');
-  const choose_gpu = selected_node_type == 'gpu';
+  const choose_gpu = selected_node_type.includes('gpu');
 
   toggle_visibility_of_form_group(cuda_element, choose_gpu);
   if(choose_gpu){
     toggle_options("batch_connect_session_context_cuda_version");
   }
+}
+
+/**
+ * Toggle the visibility of the email on started field
+ */
+function toggle_email_on_started() {
+  const element = $('#batch_connect_session_context_bc_email_on_started');
+  const supported = !current_cluster_capitalized().includes('Kubernetes');
+
+  toggle_visibility_of_form_group(element, supported);
 }
 
 /**
@@ -222,9 +232,10 @@ function node_type_change_handler(event) {
  * Update UI when the cluster changes
  */
 function cluster_change_handler(event) {
-  fix_num_cores(event);
   toggle_options("batch_connect_session_context_cuda_version");
   toggle_options("batch_connect_session_context_node_type");
+  fix_num_cores(event);
+  toggle_email_on_started();
 }
 
 /**
@@ -236,6 +247,7 @@ fix_num_cores({ target: document.querySelector('#batch_connect_session_node_type
 toggle_cuda_version_visibility(
   $('#batch_connect_session_context_node_type option:selected').val()
 );
+toggle_email_on_started();
 toggle_options("batch_connect_session_context_cuda_version");
 toggle_options("batch_connect_session_context_node_type");
 
