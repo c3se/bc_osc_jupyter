@@ -6,6 +6,7 @@ form:
   - bc_num_hours
   - node_type
   - version
+  - working_dir
   - bc_email_on_started
 attributes:
   bc_account:
@@ -36,4 +37,9 @@ attributes:
       - [ "User specified (create ~/jupyter1.sh)",  "~/jupyter1.sh" ]
       - [ "User specified (create ~/jupyter2.sh)",  "~/jupyter2.sh" ]
       - [ "User specified (create ~/jupyter3.sh)",  "~/jupyter3.sh" ]
-
+  working_dir:
+    label: "Working Directory"
+    data-filepicker: true
+    data-target-file-type: dirs  # Valid values are: files, dirs, or both
+    readonly: false
+    help: "Select your project directory; defaults to $HOME"
