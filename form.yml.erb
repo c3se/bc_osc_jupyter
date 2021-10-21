@@ -10,8 +10,9 @@ form:
   - bc_email_on_started
 attributes:
   bc_account:
+    widget: "select"
     label: "Project"
-    help: "Write in your project"
+    options: [<%= SlurmData.accounts.join(', ') %>]
   node_type:
     widget: "select"
     label: "Node type"
