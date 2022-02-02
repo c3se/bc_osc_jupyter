@@ -17,23 +17,32 @@ attributes:
     widget: "select"
     label: "Node type"
     options:
-      - [ "1xT4", "1xT4", data-option-for-alvis: true ]
-      - [ "2xT4", "2xT4", data-option-for-alvis: true ]
-      - [ "3xT4", "3xT4", data-option-for-alvis: true ]
-      - [ "4xT4", "4xT4", data-option-for-alvis: true ]
-      - [ "5xT4", "5xT4", data-option-for-alvis: true ]
-      - [ "6xT4", "6xT4", data-option-for-alvis: true ]
-      - [ "7xT4", "7xT4", data-option-for-alvis: true ]
-      - [ "8xT4", "8xT4", data-option-for-alvis: true ]
-      - [ "1xV100", "1xV100", data-option-for-alvis: true ]
-      - [ "2xV100", "2xV100", data-option-for-alvis: true ]
-      - [ "3xV100", "3xV100", data-option-for-alvis: true ]
-      - [ "4xV100", "4xV100", data-option-for-alvis: true ]
+      - [ "T4:1", "T4:1", data-option-for-alvis: true ]
+      - [ "T4:2", "T4:2", data-option-for-alvis: true ]
+      - [ "T4:3", "T4:3", data-option-for-alvis: true ]
+      - [ "T4:4", "T4:4", data-option-for-alvis: true ]
+      - [ "T4:5", "T4:5", data-option-for-alvis: true ]
+      - [ "T4:6", "T4:6", data-option-for-alvis: true ]
+      - [ "T4:7", "T4:7", data-option-for-alvis: true ]
+      - [ "T4:8", "T4:8", data-option-for-alvis: true ]
+      - [ "A40:1", "A40:1", data-option-for-alvis: true ]
+      - [ "A40:2", "A40:2", data-option-for-alvis: true ]
+      - [ "A40:3", "A40:3", data-option-for-alvis: true ]
+      - [ "A40:4", "A40:4", data-option-for-alvis: true ]
+      - [ "A100:1", "A100:1", data-option-for-alvis: true ]
+      - [ "A100:2", "A100:2", data-option-for-alvis: true ]
+      - [ "A100:3", "A100:3", data-option-for-alvis: true ]
+      - [ "A100:4", "A100:4", data-option-for-alvis: true ]
+      - [ "V100:1", "V100:1", data-option-for-alvis: true ]
+      - [ "V100:2", "V100:2", data-option-for-alvis: true ]
+      - [ "V100:3", "V100:3", data-option-for-alvis: true ]
+      - [ "V100:4", "V100:4", data-option-for-alvis: true ]
+
   version:
     widget: "select"
     label: "Runtime"
     options:
-      - [ "Python 3.8.6, TensorFlow 2.5.0, PyTorch 1.7.1",  "/apps/jupyter/python-3.8.6-tensorflow-2.5.0-pytorch-1.7.1.sh" ]
+      - [ "Python 3.8.6, TensorFlow 2.5.0, PyTorch 1.8.1",  "/apps/jupyter/python-3.8.6-tensorflow-2.5.0-pytorch-1.8.1.sh" ]
       - [ "Container: TensorFlow 2.2.0 NGC",  "/apps/jupyter/TensorFlow-2.2.0-NGC.sh" ]
       - [ "User specified (create ~/jupyter1.sh)",  "~/jupyter1.sh" ]
       - [ "User specified (create ~/jupyter2.sh)",  "~/jupyter2.sh" ]
