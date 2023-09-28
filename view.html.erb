@@ -17,9 +17,12 @@
   }
 </script>
 
-<form id="<%= form_id %>" action="<%= full_url %>" method="post" target="_blank" onsubmit="changeTarget()" >
+<form id="<%= form_id %>" action="<%= full_url %>" method="post" target="_blank" onsubmit="changeTarget()" class="flex-container">
   <input type="hidden" name="password" value="<%= password %>">
   <button class="btn btn-primary" type="submit">
     <i class="fa fa-cogs"></i> Connect to Jupyter
   </button>
+  <a href="<%= job_stats_link %>" target="_blank" class="btn btn-info">
+    <i class="fa fa-cogs"></i> Job Statistics
+  </a>
 </form>

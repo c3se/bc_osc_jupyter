@@ -38,6 +38,9 @@ PASSWORD_SHA1="$(echo -n "${password}${SALT}" | openssl dgst -sha1 | awk '{print
 # `script.sh.erb` file when launching the Jupyter server.
 export CONFIG_FILE="${PWD}/config.py"
 
+# Get grafana link
+job_stats_link=$(job_stats.py $SLURM_JOB_ID)
+
 # Notebook root directory
 <%
 # Set our working directory.
