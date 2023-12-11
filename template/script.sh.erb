@@ -3,4 +3,6 @@
 echo "Starting main script..."
 echo "TTT - $(date)"
 
+unset SLURM_EXPORT_ENV
+
 source "<%= context.version %>"
