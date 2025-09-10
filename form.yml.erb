@@ -71,10 +71,6 @@ attributes:
 <% glob_prettify_lookup(["/apps/portal/jupyter/*.sh"]).each do |pretty_path, path| %>
         - [ "<%= pretty_path %>", "<%= path %>" ]
 <% end %>
-      Local LLM:
-<% glob_prettify_lookup(["/apps/portal/chatbot/*.sh"]).each do |pretty_path, path| %>
-        - [ "<%= pretty_path %>", "<%= path %>" ]
-<% end %>
       User provided:
         - [ "~/portal/jupyter/*.sh",  "x", disabled: true ]
 <% glob_prettify_lookup(["#{Dir.home}/jupyter*.sh", "#{Dir.home}/portal/jupyter/*.sh"]).each do |pretty_path, path| %>
